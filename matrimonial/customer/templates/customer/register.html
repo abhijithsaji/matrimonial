@@ -1,0 +1,80 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Register | Matrimonial{% endblock title %}
+
+{% block content %}
+
+<section id="form"><!--form-->
+		<div class="container">
+			
+				<div class="col-md-6 col-md-offset-3">
+					<div class="login-form"><!--login form-->
+						<h2>Register your account</h2>
+						<form method='POST' name='register'>{% csrf_token %}
+
+
+							{{form.as_p}}
+							{{form2.as_p}}
+
+
+
+
+							{% comment %} {{form2.name}}
+
+							{{form.username}}
+
+							{{form.email}}
+
+
+							{{form2.address}}
+
+							{{form2.city}}
+
+							{{form2.country}}
+
+							{{form2.gender}}
+
+							{{form2.date_of_birth}}
+
+							{{form2.phone}}
+
+							{{form.password1}}
+
+							{{form.password2}} {% endcomment %}
+														
+							
+							{{form.error}}
+							{{form2.error}}
+
+
+							{% for message  in messages %}
+							<p>{{message}}</p>
+							{% endfor %}<br><br>
+							<span>
+								<input type="checkbox" class="checkbox"> 
+								By clicking this checkbox, you agree our <strong>terms of use.</strong><i class="far fa-copyright"></i>2021 matrimonial, All Rights Reserved
+							</span>
+							
+							<button type="submit" class="btn btn-default">SignUp</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+
+	</div>
+	</section>
+
+	<script>
+
+	var form_fields = document.getElementsByTagName('input')
+
+		form_fields[9].type = "date"
+		
+
+	</script>
+
+
+{% endblock content %}
+
+
+
