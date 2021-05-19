@@ -5,6 +5,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 
+from django.http import HttpResponse
+from django.http import JsonResponse
+
 from .forms import *
 # Create your views here.
 
@@ -85,3 +88,176 @@ def register(request):
         'form2':form2,
         }
     return render(request, 'customer/register.html',context)
+
+
+
+def edit_profile_basic(request):
+    
+    customer = request.user.customer
+    form = CustomerBasicForm(instance = customer)
+
+    if request.method == "POST":
+        form = CustomerBasicForm(request.POST, instance = customer)
+        try:
+            religion = request.POST.get('religion')
+            religion = Religion.objects.get(name=religion)
+
+            caste = request.POST.get('caste')
+            caste = Caste.objects.get(name=caste , religion=religion)
+
+        except:
+            messages.warning(request, 'Please enter religion/cast details properly')
+            return redirect('edit-profile-basic')
+            
+
+        if form.is_valid():
+            form.save()
+            customer.religion = religion
+            customer.caste = caste
+            customer.save()
+            messages.warning(request, 'Please make sure the details entered is valid')  
+            return redirect('edit-profile-personal')
+
+        
+    context = {
+        'form':form,
+    }
+    return render(request, 'customer/edit_profile_basic.html',context)
+
+
+def edit_profile_personal(request):
+    
+    customer = request.user.customer
+    form = CustomerPersonalForm(instance = customer)
+
+    if request.method == "POST":
+        form = CustomerPersonalForm(request.POST, instance = customer)       
+        
+        if form.is_valid():
+            form.save()
+
+            return redirect('edit-profile-personality')
+
+        
+    context = {
+        'form':form,
+    }
+    return render(request, 'customer/edit_profile_personal.html',context)
+
+
+def edit_profile_personality(request):
+    
+    customer = request.user.customer
+    form = CustomerPersonalityForm(instance = customer)
+    form2 = MultiForm(instance = customer)
+
+    if request.method == "POST":
+        form = CustomerPersonalityForm(request.POST, instance = customer)  
+        form2 = MultiForm(request.POST,instance = customer)
+
+
+        if form.is_valid():
+            form.save()
+        
+        if form2.is_valid():
+            music = request.POST.get('music')
+            music_types = form2.cleaned_data['music_types']
+            print(music_types.exists())
+            reading = request.POST.get('reading')
+            reading_types = form2.cleaned_data['reading_types']
+            sports = request.POST.get('sports')
+            sport_types = form2.cleaned_data['sport_types']
+            foods = request.POST.get('foods')
+            food_types = form2.cleaned_data['food_types']
+            dress = request.POST.get('dress')
+            dress_types = form2.cleaned_data['dress_types']
+            movie = request.POST.get('movie')
+            movie_types = form2.cleaned_data['movie_types']
+
+
+            customer.music = music
+            if music_types.exists():
+                customer.music_types.set(music_types)
+            
+            customer.reading = reading
+            if reading_types.exists():
+                customer.reading_types.set(reading_types)
+
+            customer.sports = sports
+            if sport_types.exists():
+                customer.sport_types.set(sport_types)
+
+            customer.foods = foods
+            if food_types.exists():
+                customer.food_type.set(food_types)
+
+            customer.dress = dress
+            if dress_types.exists():
+                customer.dress_types.set(dress_types)
+
+            customer.movie = movie
+            if movie_types.exists():
+                customer.movie_types.set(movie_types)
+            customer.save()
+
+        
+
+            return redirect('edit-profile-astro')
+
+        
+    context = {
+        'form':form,
+        'form2':form2,
+        'customer':customer,
+    }
+    return render(request, 'customer/edit_profile_personality.html',context)
+
+
+
+def edit_profile_astro(request):
+    
+    customer = request.user.customer
+    form = CustomerAstroForm(instance = customer)
+
+    if request.method == "POST":
+        form = CustomerAstroForm(request.POST, instance = customer)       
+        
+        if form.is_valid():
+            form.save()
+
+            return redirect('home')
+
+        
+    context = {
+        'form':form,
+    }
+    return render(request, 'customer/edit_profile_astro.html',context)
+
+
+
+def edit_profile_prefered_partner(request):
+    
+    customer = request.user.customer
+    form = MultiForm(instance = customer)
+
+    if request.method == "POST":
+        print(request.POST)
+        form = MultiForm(request.POST, instance = customer)       
+        # if form.is_valid():
+        #     form.save()   
+        
+    context = {
+        'form':form,
+    }
+    return render(request, 'customer/edit_profile_prefered_partner.html',context)
+
+
+def get_json_religion_data(request):
+    qs_val = list(Religion.objects.values())
+    return JsonResponse({'data':qs_val})
+
+def get_json_caste_data(request, *args, **kwargs):
+    selected_religion = kwargs.get('religion')
+    print(kwargs.get('caste'))
+    obj_caste = list(Caste.objects.filter(religion__name=selected_religion).values())
+    return JsonResponse({'data':obj_caste}) 

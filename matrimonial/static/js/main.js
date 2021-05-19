@@ -28,3 +28,65 @@ $(document).ready(function(){
 		});
 	});
 });
+
+
+
+const religionDataBox = document.getElementById('religion-data-box')
+const religionInput = document.getElementById('religion')
+
+
+const casteDataBox = document.getElementById('caste-data-box')
+const casteInput = document.getElementById('caste')
+
+$.ajax({
+    type: 'GET',
+    url: '/religion-json/',
+    success: function(response){
+        console.log(response.data)
+        const religionData = response.data
+        religionData.map(item=>{     
+            const option = document.createElement('option')
+            option.textContent = item.name 
+            option.setAttribute('class', 'item')
+            option.setAttribute('data-value',item.name)
+            religionDataBox.appendChild(option)
+
+        })
+    },
+    error: function(error){
+        console.log(error)
+    }
+})
+
+religionInput.addEventListener('change', e=>{
+    console.log(e.target.value)
+    const selectedreligion = e.target.value
+
+    casteDataBox.innerHTML = "" 
+    const option = document.createElement('option')
+    option.textContent = "select..."
+    
+    option.setAttribute('data-value',"choose caste")
+    casteDataBox.appendChild(option)
+
+    $.ajax({
+        type:'GET',
+        url:`/caste-json/${selectedreligion}/`,
+        success: function(response){
+            console.log(response.data)
+            const casteData = response.data
+            casteData.map(item=>{
+                const option = document.createElement('option')
+                option.textContent = item.name  
+                option.setAttribute('class', 'item')
+                option.setAttribute('data-value',item.value)
+                casteDataBox.appendChild(option)
+            })
+        },
+        error: function(error){
+            console.log(error)
+        }
+
+    })
+
+})

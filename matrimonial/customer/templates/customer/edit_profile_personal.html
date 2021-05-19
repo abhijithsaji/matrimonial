@@ -1,0 +1,212 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Edit profile | Matrimonial{% endblock title %}
+{% block content %}
+
+
+<section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-12 padding-right">
+					
+					
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li ><a href="{% url 'edit-profile-basic' %}" >Basic Details</a></li>
+								<li class="active"><a href="{% url 'edit-profile-personal' %}" >Personal Information</a></li>
+								<li  ><a href="{% url 'edit-profile-personality' %}" >My personality</a></li>
+								<li  ><a href="{% url 'edit-profile-astro' %}" >Astro details</a></li>
+								<li><a href="{% url 'edit-profile-prefered-partner' %}" >Preffered partner</a></li>
+							</ul>
+						</div>
+						<div class="tab-content ">
+														
+							<div class="col-md-12">
+					<div class="login-form"><!--login form-->
+					{% for message  in messages %}
+							
+					<div class="alert alert-{{message.tags}}" role="alert">
+						{{message}}
+					</div>
+					{% endfor %}
+					
+						
+						<form method='POST' name='register'>{% csrf_token %}
+
+						<div class="row">
+							<h2>Personal Information</h2>
+							<div class="form-group col-md-6">
+
+								<label >Complexion</label>
+								{{form.complexion}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Body Type</label>
+								{{form.body_type}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Blood group <span style="color:red;">*</span></label>
+								{{form.blood_group}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Occupation <span style="color:red;">*</span></label>
+								{{form.occupation}}
+							</div>
+
+							<div class="form-group col-md-6">
+								<label >Employed in <span style="color:red;">*</span></label>
+								{{form.employed_in}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Annual income (rupees) <span style="color:red;">*</span></label>
+								{{form.annual_income}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Star sign<span style="color:red;">*</span></label>
+								{{form.star_sign}}
+							</div>
+
+						</div>
+						<div class="row">
+							<h2>Family Details</h2>
+							<div class="form-group col-md-6">
+								<label >About My Family [max : 1000 char] </label>
+								{{form.about_my_family}}
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="form-group col-md-6">
+								<label >Father's Name <span style="color:red;">*</span></label>
+								{{form.fathers_name}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label >Father's Family Name <span style="color:red;">*</span></label>
+								{{form.fathers_family_name}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label >Father Employed in</label>
+								{{form.fathers_ancestral_place}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Father's Ancestral Place<span style="color:red;">*</span></label>
+								{{form.fathers_ancestral_place}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Father's Occupation</label>
+								{{form.fathers_occupation}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Father's Company name</label>
+								{{form.fathers_company_name}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Father's Company Location</label>
+								{{form.fathers_company_location}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label >Mothers's Name <span style="color:red;">*</span></label>
+								{{form.mothers_name}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label >Mother's Family Name <span style="color:red;">*</span></label>
+								{{form.mothers_family_name}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label >Mother Employed in <span style="color:red;">*</span</label>
+								{{form.mothers_ancestral_place}}
+							</div>
+							
+							<div class="form-group col-md-6">
+								<label>Mother's Ancestral Place<span style="color:red;">*</span></label>
+								{{form.mothers_ancestral_place}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Mother's Occupation <span style="color:red;">*</span</label>
+								{{form.mothers_occupation}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Mother's Company name</label>
+								{{form.mothers_company_name}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Mother's Company Location</label>
+								{{form.mothers_company_location}}
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label >Country Living in <span style="color:red;">*</span></label>
+								{{form.country_living_in}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Current Location <span style="color:red;">*</span></label>
+								{{form.current_location}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Permanent Location <span style="color:red;">*</span></label>
+								{{form.permanent_location}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Residential Status <span style="color:red;">*</span></label>
+								{{form.residential_status}}
+							</div>
+							<div class="form-group col-md-6">
+								<label >Belongs to  </label>
+								{{form.belongs_to}}
+							</div>
+
+						</div>
+													
+							{{form.error}}
+						<div class="row">
+							<button type="submit" class="btn btn-default">Save and continue</button>
+						</div>
+						</form>
+					</div><!--/login form-->
+				</div>
+							
+						</div>
+					</div><!--/category-tab-->
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+	var form_fields = document.getElementsByTagName('textarea')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('select')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('input')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+		{% comment %} form_fields[1].placeholder += "type Username"
+		form_fields[2].placeholder += "type password" {% endcomment %}
+
+	</script>
+	{% endblock content %}

@@ -1,0 +1,275 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Edit profile | Matrimonial{% endblock title %}
+{% block content %}
+
+
+<section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-12 padding-right">
+					
+					
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li class="active"><a href="{% url 'edit-profile-basic' %}" >Basic Details</a></li>
+								<li><a href="{% url 'edit-profile-personal' %}" >Personal Information</a></li>
+								<li ><a href="{% url 'edit-profile-personality' %}" >My personality</a></li>
+								<li  ><a href="{% url 'edit-profile-astro' %}" >Astro details</a></li>
+								<li><a href="{% url 'edit-profile-prefered-partner' %}" >Preffered partner</a></li>
+							</ul>
+						</div>
+						<div class="tab-content ">
+														
+							<div class="col-md-12">
+							
+					<div class="login-form"><!--login form-->
+					{% for message  in messages %}
+							
+					<div class="alert alert-{{message.tags}}" role="alert">
+						{{message}}
+					</div>
+					{% endfor %}
+					<br><br>
+						<h2>Complete your registration</h2>
+						<form method='POST' name='register'>{% csrf_token %}
+
+					<div class="row">
+
+						<div class="form-group col-md-6" id="religion">
+						<label for="religion">Religion</label>
+							<select  id="religion-data-box" name="religion">
+								<option>select</option>
+								
+							</select>
+						</div>
+						<div class="form-group col-md-6" id="caste">
+
+						<label for="caste">Caste</label>
+							<select  id="caste-data-box" name="caste">
+								<option>select</option>
+								
+							</select>
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Height (cm) <span style="color:red;">*</span></label>
+								{{form.height}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">weight (kg) <span style="color:red;">*</span></label>
+								{{form.weight}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Martial Status <span style="color:red;">*</span></label>
+								{{form.martial_status}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Mother Tongue <span style="color:red;">*</span></label>
+								{{form.mother_tongue}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Physical Status <span style="color:red;">*</span></label>
+								{{form.physical_status}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">About Me<span style="color:red;">*</span></label>
+								{{form.about_me}}
+						</div>
+
+
+					</div>
+
+					<div class="row">
+						<h2>Education</h2>
+						<div class="form-group col-md-6">
+
+							<label for="caste">Highest Education <span style="color:red;">*</span></label>
+								{{form.education}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Specification <span style="color:red;">*</span></label>
+								{{form.specification}}
+						</div>
+
+						<h2>School Details</h2>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Name Of School </label>
+								{{form.school_name}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Location </label>
+								{{form.school_location}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Year Of Passout</label>
+								{{form.year_of_passout_school}}
+						</div>
+					</div>
+
+					<div class="row">
+
+						<h2>College Details (UG)</h2>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Name of College </label>
+								{{form.college_name_ug}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Location </label>
+								{{form.college_location_ug}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Course </label>
+								{{form.course_ug}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Year of Passout </label>
+								{{form.year_of_passout_college_ug}}
+						</div>
+
+
+					</div>
+
+					<div class="row">
+
+						<h2>College Details (PG ,if any)</h2>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Name of College </label>
+								{{form.college_name_pg}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Location </label>
+								{{form.college_location_pg}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Course </label>
+								{{form.course_pg}}
+						</div>
+
+						<div class="form-group col-md-6">
+
+							<label for="caste">Year of Passout </label>
+								{{form.year_of_passout_college_pg}}
+						</div>
+
+
+					</div>
+
+					<div class="row">
+						<h2>Company Details</h2>
+						<div class="form-group col-md-6">
+							<label for="caste">Name of Company </label>
+							{{form.company_name}}
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="caste">Designation </label>
+							{{form.designation}}
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="caste">Location </label>
+							{{form.company_location}}
+						</div>
+					
+					</div>
+
+					<div class="row">
+						<h2>Contact Information</h2>
+						<div class="form-group col-md-6">
+							<label for="caste">Lan Number <span style="color:red;">*</span></label>
+								{{form.lan_number}}
+						</div>
+
+						<div class="form-group col-md-6">
+							<label for="caste">Mobile <span style="color:red;">*</span></label>
+								{{form.phone}}
+						</div>
+						
+					</div>
+
+
+							
+							
+							{{form.error}}
+							
+
+
+							
+							
+						<div class="form-group col-md-6">
+							
+							<button type="submit" class="btn btn-default">Save and continue</button>
+						</div>
+						</form>
+					</div><!--/login form-->
+				</div>
+							
+						</div>
+					</div><!--/category-tab-->
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+	var form_fields = document.getElementsByTagName('textarea')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('select')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('input')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+			
+		}
+		
+	
+	</script>
+	{% endblock content %}

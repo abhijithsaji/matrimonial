@@ -1,0 +1,249 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}Edit profile | Matrimonial{% endblock title %}
+{% block content %}
+{% block extra_script %}<script src="{% static 'js/slider-range.js' %}"></script>{% endblock extra_script %}
+
+<section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-12 padding-right">
+					
+					
+					<div class="category-tab shop-details-tab"><!--category-tab-->
+						<div class="col-sm-12">
+							<ul class="nav nav-tabs">
+								<li ><a href="{% url 'edit-profile-basic' %}" >Basic Details</a></li>
+								<li><a href="{% url 'edit-profile-personal' %}" >Personal Information</a></li>
+								<li class="active" ><a href="{% url 'edit-profile-personality' %}" >My personality</a></li>
+								<li  ><a href="{% url 'edit-profile-astro' %}" >Astro details</a></li>
+								<li><a href="{% url 'edit-profile-prefered-partner' %}" >Preffered partner</a></li>
+
+							</ul>
+						</div>
+						<div class="tab-content ">
+														
+							<div class="col-md-12">
+					<div class="login-form"><!--login form-->
+					{% for message  in messages %}
+							
+					<div class="alert alert-{{message.tags}}" role="alert">
+						{{message}}
+					</div>
+					{% endfor %}
+					
+						<h2>Personality</h2>
+						<form method='POST' name='register'>{% csrf_token %}
+
+						<div class="row">
+
+							<div class="form-group col-md-6">
+								{{form.diet.errors}}
+								<label>Diet</label>
+									{{form.diet}}
+							</div>
+							<div class="form-group col-md-6">
+								{{form.smoking.errors}}
+								<label>Smoking </label>
+									{{form.smoking}}
+							</div>
+							<div class="form-group col-md-6">
+							{{form.drinking.errors}}
+								<label>Drinking  </label>
+									{{form.drinking}}
+							</div>
+							<div class="form-group col-md-6">
+								<label>Gardening [ <span id="demo" style="color:red;">  </span> ] </label>
+								<input type="range" min="1" max="10" value="{{customer.gardening}}" class="slider" id="myRange" name="gardening">
+								
+							</div>
+							<div class="form-group col-md-6">
+								<label>Astronamy [ <span id="demo2" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.astronamy}}" class="slider" id="myRange2" name="astronamy">
+								
+							</div>
+							
+						</div>
+						<div class="row">
+							
+							
+							<div class="form-group col-md-6">
+								{{form.sport_types.errors}}
+								<label>Sports [ <span id="demo6" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.sports}}" class="slider" id="myRange6" name="sports">
+								
+								{{form2.sport_types}}
+							</div> 
+
+							<div class="form-group col-md-6">
+								<h2>List of sports Selected  </h2>
+								<ul >
+									{% for m in customer.sport_types.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+						</div>
+						<div class="row">
+							
+							<div class="form-group col-md-6">
+							{{form.music_types.errors}}
+								<label>Music [ <span id="demo3" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.music}}" class="slider3" id="myRange3" name="music">
+								
+								{{form2.music_types}}
+							</div>
+							<div class="form-group col-md-6">
+								<h2>List of Music Selected  </h2>
+								<ul >
+									{% for m in customer.music_types.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+							
+						</div>
+						<div class="row">
+
+							<div class="form-group col-md-6">
+							{{form.food_types.errors}}
+								<label>Foods [ <span id="demo7" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.foods}}" class="slider" id="myRange7" name="foods">
+								
+								{{form2.food_types}}
+							</div> 
+							<div class="form-group col-md-6">
+								<h2>List of Food Types Selected  </h2>
+								<ul >
+									{% for m in customer.food_type.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+
+						</div>
+						<div class="row">
+							<div class="form-group col-md-6">
+							{{form.movie_types.errors}}
+								<label>Movies [ <span id="demo5" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.movie}}" class="slider" id="myRange5" name="movies">
+								
+								{{form2.movie_types}}
+							</div> 
+
+							<div class="form-group col-md-6">
+								<h2>List of Movie Types Selected  </h2>
+								<ul >
+									{% for m in customer.movie_types.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+
+						</div>
+
+						<div class="row">
+
+
+							<div class="form-group col-md-6">
+							{{form.dress_types.errors}}
+								<label>Dress [ <span id="demo7" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.dress}}" class="slider" id="myRange7" name="dress">
+								
+								{{form2.dress_types}}
+							</div> 
+							<div class="form-group col-md-6">
+								<h2>List of Dress Types Selected  </h2>
+								<ul >
+									{% for m in customer.dress_types.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+
+						</div>
+						<div class="row">
+
+							<div class="form-group col-md-6">
+							{{form.reading_types.errors}}
+								<label>Reading [ <span id="demo4" style="color:red;">  </span> ]  </label>
+								<input type="range" min="1" max="10" value="{{customer.reading}}" class="slider" id="myRange4" name="reading">
+								
+								{{form2.reading_types}}
+							</div>
+							
+							<div class="form-group col-md-6">
+							{{form.music_types.errors}}
+								<h2>List of Reading Selected  </h2>
+								<ul >
+									{% for m in customer.reading_types.values %}
+									<li class=""><label>{{m.name}}</label></li>
+									{% endfor %}
+								</ul>
+								
+							</div>
+
+						</div>
+
+						<div class="row">
+						
+							<button type="submit" class="btn btn-default">Save and continue</button>
+						</div>
+							{{form.error}}
+						</form>
+					</div><!--/login form-->
+				</div>
+							
+						</div>
+					</div><!--/category-tab-->
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+	var form_fields = document.getElementsByTagName('ul')
+	form_fields[4].className += 'list-group';
+
+	var form_fields = document.getElementsByTagName('li')
+	for (var field in form_fields){	
+			if (field>17){
+			form_fields[field].className += 'list-group-item';}
+		}
+
+
+		
+
+
+	
+
+	var form_fields = document.getElementsByTagName('textarea')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('select')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('input')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+		{% comment %} form_fields[1].placeholder += "type Username"
+		form_fields[2].placeholder += "type password" {% endcomment %}
+
+	</script>
+	{% endblock content %}
