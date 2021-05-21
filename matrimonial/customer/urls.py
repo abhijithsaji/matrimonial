@@ -22,4 +22,8 @@ urlpatterns = [
     path('religion-json/',get_json_religion_data,name="religion-json"),
     path('caste-json/<str:religion>/',get_json_caste_data,name="caste-json"),
 
+    # My profile
+
+    path('my-profile',my_profile,name='my-profile'),
+
 ]

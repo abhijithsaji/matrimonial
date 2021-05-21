@@ -79,15 +79,15 @@
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">Features Matches</h2>
 
-						{% for i in r %}
+						{% for customer in customers %}
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<img src="{% static 'images/home/product1.jpg' %}" alt="" />
-											<h2>Andria Disoosa</h2>
-											<p>Age : 25</p>
-											<p>Software Engineer at Cognizant , Ernakulam</p>
+											<img src="{{customer.image.url}}" alt="" />
+											<h2>{{customer.name}}</h2>
+											<p>Age : {{customer.age}}</p>
+											<p>{{customer.occupation}} at {{customer.employed_in}}</p>
 											<!-- <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a> -->
 										</div>
 										<!-- <div class="product-overlay">
@@ -102,7 +102,12 @@
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
 										<li><a href="#"><i class="fa fa-heart" style="color: red;"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-circle" style="color: green;"></i>Online</a></li>
+										<li><a href="#">View Profile <i class="fa fa-arrow-right" style="color: grey;"></i></a></li>
+										{% comment %} {% for u in users %}
+										{% if customer.user.username == u.user.username %}
+											<li><a href="#"><i class="fa fa-circle" style="color: green;"></i>Online</a></li>
+										{% endif %}
+										{% endfor %} {% endcomment %}
 									</ul>
 								</div>
 							</div>

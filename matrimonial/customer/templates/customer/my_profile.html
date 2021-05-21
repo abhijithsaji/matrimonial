@@ -1,0 +1,152 @@
+{% extends 'customer/base.html' %}
+{% load static %}
+
+{% block title %}My profile | Matrimonial{% endblock title %}
+{% block content %}
+
+
+<section>
+		<div class="container">
+			<div class="row">
+				
+				
+				<div class="col-sm-12 padding-right">
+
+                <div class="product-details"><!--product-details-->
+						<div class="col-sm-5">
+							<div class="view-product">
+								<img class="img-fluid" src="{{customer.image.url}}" alt="" />
+                                <span>									
+									 <button type="button" class="btn btn-fefault cart">
+										<i class="fa fa-arrow-right"></i> 
+										 Change photo
+									</button>
+                                </span> 
+								
+							</div>
+                            
+							
+						</div>
+						<div class="col-sm-7">
+							<div class="product-information"><!--/product-information-->
+								<img src="images/product-details/new.jpg" class="newarrival" alt="" />
+								<h3><strong>{{customer.name}}</strong></h3>
+								<h2>ID: {{customer.id}} | {{customer.age}} years | {{customer.religion}}</h2>
+								
+								<h4>{{customer.occupation}}  , {{customer.city}}  ,  {{customer.country}}</h4>
+								<p><b>last login:</b> {{customer.user.last_login}}</p><hr>
+
+                                <a href="" ><i class="fa fa-user"></i> Contacts viewed : <span class="badge badge-danger">0</span></a><br>
+                                <a href="" ><i class="fa fa-user"></i> People visited your profile : <span class="badge badge-danger">0</span></a><br>
+                                <a href="" ><i class="fa fa-user"></i> Views for your profile : <span class="badge badge-primary">0</span></a><br>
+                                <a href="" ><i class="fa fa-user"></i> You have visited these profiles : <span class="badge badge-primary">0</span></a><br>
+								<span>									
+									{% comment %} <button type="button" class="btn btn-fefault cart">
+										<i class="fa fa-arrow-right"></i> 
+										 Send interest
+									</button> {% endcomment %}
+								</span>
+								<a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+							</div><!--/product-information-->
+						</div>
+					</div><!--/product-details-->
+
+        {% comment %} <div class="header-bottom" style="box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; border-radius:15px;"><!--header-bottom-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-9">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+						</div>
+						<div class="mainmenu">
+							<ul class="nav navbar-nav collapse navbar-collapse">
+                               
+								<!-- <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <ul role="menu" class="sub-menu">
+                                        <li><a href="blog.html">Blog List</a></li>
+										<li><a href="blog-single.html">Blog Single</a></li>
+                                    </ul>
+                                </li>  -->
+								<li><a href="#"><i class="fa fa-envelope"></i> Messages (10)</a></li>
+								<li><a href="#"><i class="fa fa-heart"></i> Wishlist (15)</a></li>
+								<li><a href=""><i class="fa fa-plus-circle"></i> Interests (20)</a></li>
+								<li><a href=""><i class="fa fa-list-ul"></i> Requests (10)</a></li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div><br><br><br>  {% endcomment %}
+
+					
+                {% comment %} <div class="tab-content " >
+                                                
+                    <div class="col-md-6 col-md-offset-3">
+					<div class="login-form"><!--login form-->
+					{% for message  in messages %}
+							
+					<div class="alert alert-{{message.tags}}" role="alert">
+						{{message}}
+					</div>
+					{% endfor %}
+					
+						
+						<form method='POST' name='register'>{% csrf_token %}
+
+						
+  
+
+
+							{{form}}
+							
+							{{form.error}}
+							
+
+
+							{% for message  in messages %}
+							<p>{{message}}</p>
+							{% endfor %}<br><br>
+							
+							
+							<button type="submit" class="btn btn-default">Save and continue</button>
+						</form>
+					</div><!--/login form-->
+				</div>
+							
+						</div>
+					</div><!--/category-tab--> {% endcomment %}
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+
+	var form_fields = document.getElementsByTagName('textarea')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('select')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+
+	var form_fields = document.getElementsByTagName('input')
+	for (var field in form_fields){	
+			form_fields[field].className += 'form-control';
+		}
+		{% comment %} form_fields[1].placeholder += "type Username"
+		form_fields[2].placeholder += "type password" {% endcomment %}
+
+	</script>
+	{% endblock content %}

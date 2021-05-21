@@ -26,7 +26,7 @@ class CustomerForm(ModelForm):
 class CustomerBasicForm(ModelForm):
 	class Meta:
 		model = Customer
-		fields = ['height','weight','martial_status','mother_tongue','physical_status',
+		fields = ['age','height','weight','martial_status','mother_tongue','physical_status',
 		'about_me','education','specification','school_name','school_location',
 		'year_of_passout_school','college_name_ug',
 		'college_location_ug','course_ug','year_of_passout_college_ug',

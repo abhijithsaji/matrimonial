@@ -85,6 +85,7 @@ class Customer(models.Model):
 
     # Basic information
 
+    age = models.PositiveIntegerField(null=True)
     height = models.FloatField(null=True)
     weight = models.FloatField(null=True)
     martial_status = models.CharField(max_length=20, choices = [('Unmarried','unmarried'),('Divorced','divorced'),

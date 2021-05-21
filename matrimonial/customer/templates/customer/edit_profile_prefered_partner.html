@@ -14,15 +14,8 @@
 					
 					
 					<div class="category-tab shop-details-tab"><!--category-tab-->
-						<div class="col-sm-12">
-							<ul class="nav nav-tabs">
-								<li ><a href="{% url 'edit-profile-basic' %}" >Basic Details</a></li>
-								<li><a href="{% url 'edit-profile-personal' %}" >Personal Information</a></li>
-								<li ><a href="{% url 'edit-profile-personality' %}" >My personality</a></li>
-								<li ><a href="{% url 'edit-profile-astro' %}" >Astro details</a></li>
-								<li class="active"><a href="{% url 'edit-profile-prefered-partner' %}" >Preffered partner</a></li>
-							</ul>
-						</div>
+						<!--tab-->
+						{% include 'customer/edit_profile_tab.html' %}
 						<div class="tab-content ">
 														
 							<div class="col-md-12 ">

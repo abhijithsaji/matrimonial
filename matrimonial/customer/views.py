@@ -1,3 +1,4 @@
+from django.db.models import base
 from django.shortcuts import render ,redirect
 
 from django.contrib import messages
@@ -8,14 +9,30 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponse
 from django.http import JsonResponse
 
+from datetime import timedelta
+import online_users.models
+
 from .forms import *
 # Create your views here.
 
 @login_required
 def home(request):
-    r = range(0,10)
+    
+    # user_activity_objects = online_users.models.OnlineUserActivity.get_user_activities(timedelta(minutes=5))
+    # number_of_active_users = user_activity_objects.count()  
+    # users = (user for user in  user_activity_objects)
+    # print(users)
+    # for user in users:
+    #     print(user.user.email)
+    #     if user.user ==  request.user:
+    #         print("online.................")
+    user = request.user
+    customers = Customer.objects.exclude(user = user)
+
+
     context = {
-        'r':r,
+        'customers':customers,
+        
     }
     return render(request, 'customer/index.html',context)
 
@@ -95,6 +112,7 @@ def edit_profile_basic(request):
     
     customer = request.user.customer
     form = CustomerBasicForm(instance = customer)
+    basic = True
 
     if request.method == "POST":
         form = CustomerBasicForm(request.POST, instance = customer)
@@ -121,6 +139,7 @@ def edit_profile_basic(request):
         
     context = {
         'form':form,
+        'basic':basic,
     }
     return render(request, 'customer/edit_profile_basic.html',context)
 
@@ -129,6 +148,7 @@ def edit_profile_personal(request):
     
     customer = request.user.customer
     form = CustomerPersonalForm(instance = customer)
+    personal = True
 
     if request.method == "POST":
         form = CustomerPersonalForm(request.POST, instance = customer)       
@@ -141,6 +161,7 @@ def edit_profile_personal(request):
         
     context = {
         'form':form,
+        'personal':personal,
     }
     return render(request, 'customer/edit_profile_personal.html',context)
 
@@ -150,6 +171,7 @@ def edit_profile_personality(request):
     customer = request.user.customer
     form = CustomerPersonalityForm(instance = customer)
     form2 = MultiForm(instance = customer)
+    personality = True
 
     if request.method == "POST":
         form = CustomerPersonalityForm(request.POST, instance = customer)  
@@ -209,6 +231,7 @@ def edit_profile_personality(request):
         'form':form,
         'form2':form2,
         'customer':customer,
+        'personality':personality,
     }
     return render(request, 'customer/edit_profile_personality.html',context)
 
@@ -218,6 +241,7 @@ def edit_profile_astro(request):
     
     customer = request.user.customer
     form = CustomerAstroForm(instance = customer)
+    astro = True
 
     if request.method == "POST":
         form = CustomerAstroForm(request.POST, instance = customer)       
@@ -230,6 +254,7 @@ def edit_profile_astro(request):
         
     context = {
         'form':form,
+        'astro':astro,
     }
     return render(request, 'customer/edit_profile_astro.html',context)
 
@@ -239,6 +264,7 @@ def edit_profile_prefered_partner(request):
     
     customer = request.user.customer
     form = MultiForm(instance = customer)
+    prefered_partner = True
 
     if request.method == "POST":
         print(request.POST)
@@ -248,6 +274,7 @@ def edit_profile_prefered_partner(request):
         
     context = {
         'form':form,
+        'prefered_partner':prefered_partner,
     }
     return render(request, 'customer/edit_profile_prefered_partner.html',context)
 
@@ -261,3 +288,14 @@ def get_json_caste_data(request, *args, **kwargs):
     print(kwargs.get('caste'))
     obj_caste = list(Caste.objects.filter(religion__name=selected_religion).values())
     return JsonResponse({'data':obj_caste}) 
+
+
+# Profile Details
+
+
+def my_profile(request):
+    customer = request.user.customer
+    context = {
+        'customer':customer,
+    }
+    return render(request, 'customer/my_profile.html',context)
